@@ -32,7 +32,7 @@ export default {
     }
     a {
       text-decoration: none;
-      color: #606266;
+      color: #303133;
     }
   }
 }

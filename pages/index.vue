@@ -1,6 +1,7 @@
 <template>
   <section class="container">
     <top-show></top-show>
+    <!-- <top-show></top-show> -->
   </section>
 </template>
 
@@ -16,7 +17,7 @@ export default {
 <style lang="scss" scoped>
 .container {
   .top-show {
-    margin-top: 30px;
+    margin: 30px 0;
   }
 }
 </style>

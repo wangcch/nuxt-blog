@@ -31,13 +31,12 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  // max-width: 960px;
   position: relative;
   .header {
     position: fixed;
     top: 0;
     width: 100%;
-    // max-width: 960px;
+    z-index: 999;
     background: #fff;
   }
   .main {

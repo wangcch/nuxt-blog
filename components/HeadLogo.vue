@@ -18,6 +18,7 @@ export default {
   h1 {
     font-weight: 200;
     margin: 0;
+    font-size: 26px;
   }
 }
 </style>
