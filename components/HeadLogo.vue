@@ -19,6 +19,9 @@ export default {
     font-weight: 200;
     margin: 0;
     font-size: 26px;
+    @media (max-width: 768px) {
+      font-size: 22px;
+    }
   }
 }
 </style>

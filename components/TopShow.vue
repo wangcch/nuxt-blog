@@ -65,12 +65,22 @@ export default {
     // background: #aaa;
     position: relative;
   }
-  .el-row, .el-col {
+  .el-row {
     height: 420px;
+    .el-col {
+      height: 100%;
+    } 
     @media (max-width: 768px) {
-      height: 200px;
+      height: auto;
+      .el-col {
+        height: auto;
+        &:first-child {
+          height: 200px;
+        }
+      }
     }
   }
+
   .ts-top-tag {
     position: absolute;
     top: 30px;
@@ -102,7 +112,6 @@ export default {
     padding: 30px;
     .date {
       color: #C0C4CC;
-      // font-weight: 200;
       margin-bottom: 6px;
     }
     h2 {
@@ -121,6 +130,9 @@ export default {
       white-space: nowrap;
       color: #3b5998;
       text-decoration: none;
+    }
+    @media (max-width: 768px) {
+      padding: 20px;
     }
   }
 }

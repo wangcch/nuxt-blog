@@ -1,11 +1,11 @@
 <template>
-  <el-container class="container">
-    <el-header class="header">
+  <el-container>
+    <el-header>
       <div class="wrap">
         <ak-header></ak-header>
       </div>
     </el-header>
-    <el-main class="main">
+    <el-main>
       <div class="wrap">
         <nuxt/>
       </div>
@@ -30,16 +30,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container {
+.el-container {
   position: relative;
-  .header {
+  .el-header {
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 999;
     background: #fff;
   }
-  .main {
+  .el-main {
     box-sizing: border-box;
     padding-top: 60px;
     width: 100%;
@@ -47,6 +47,14 @@ export default {
   .wrap {
     max-width: 960px;
     margin: 0 auto;
+  }
+  @media (max-width: 768px) {
+    .el-header, .el-main, .el-footer {
+      padding: 0 10px;
+    }
+    .el-main {
+      padding-top: 60px;
+    }
   }
 }
 </style>
