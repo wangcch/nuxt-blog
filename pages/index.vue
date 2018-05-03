@@ -13,7 +13,10 @@
       </el-col>
       <el-col :xs="24" :sm="10" :md="8">
         <div class="index-more">
-          more
+          <h2 class="index-more_title">More</h2>
+          <link-share :data="moreLink"></link-share>
+          <h2 class="index-more_title">Links</h2>
+          <link-share :data="akLink"></link-share>
         </div>
       </el-col>
     </el-row>
@@ -23,6 +26,7 @@
 <script>
 import TopShow from '~/components/TopShow.vue'
 import ArticleList from '~/components/ArticleList.vue'
+import LinkShare from '~/components/LinkShare.vue'
 
 export default {
   data () {
@@ -59,12 +63,38 @@ export default {
           url: '',
           img_url: 'https://cdn.wangcch.cc/demo/demobg.jpg'
         }
+      ],
+
+      moreLink: [
+        {
+          name: 'OJ',
+          url: 'https://oj.ahstu.cc'
+        },
+        {
+          name: 'Git',
+          url: 'https://git.ahstu.cc'
+        },
+        {
+          name: 'Talk',
+          url: 'http://talk.ahstu.cc'
+        }
+      ],
+      akLink: [
+        {
+          name: 'ahstu',
+          url: 'http://www.ahstu.edu.cn'
+        },
+        {
+          name: 'ahstu-cine',
+          url: 'http://www.ahstu.edu.cn/xxxy'
+        }
       ]
     }
   },
   components: {
     TopShow,
-    ArticleList
+    ArticleList,
+    LinkShare
   }
 }
 </script>
@@ -99,6 +129,19 @@ export default {
       color: #3b5998;
       &:hover {
         text-decoration: underline;
+      }
+    }
+  }
+  .index-more {
+    .index-more_title {
+      font-size: 22px;
+      color: #303133;
+      margin: 0 0 15px 0;
+      padding-bottom: 5px;
+      border-bottom: 1px solid #DCDFE6;
+      margin-top: 30px;
+      &:first-child {
+        margin-top: 0;
       }
     }
   }
