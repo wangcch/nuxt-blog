@@ -38,6 +38,7 @@ export default {
     width: 100%;
     z-index: 999;
     background: #fff;
+    border-bottom: 1px solid #E4E7ED;
   }
   .el-main {
     box-sizing: border-box;

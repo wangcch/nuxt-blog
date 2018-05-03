@@ -6,12 +6,12 @@
     <div class="head-menu">
       <nav-menu :data="menu"></nav-menu>
       <div class="head-menu_phone">
-          <el-dropdown trigger="click">
-            <span class="ty-icon-menu"></span>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item v-for="(item, index) in menu" :key="item.name + index" class="phone-link"><router-link :to="item.url">{{ item.name }}</router-link></el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
+        <el-dropdown trigger="click">
+          <span class="ty-icon-menu"></span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item v-for="(item, index) in menu" :key="item.name + index" class="phone-link"><router-link :to="item.url">{{ item.name }}</router-link></el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
       </div>
     </div>
   </div>
@@ -65,6 +65,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    padding-right: 5px;
     .ty-icon-menu {
       width: 20px;
       display: none;

@@ -23,13 +23,13 @@ export default {
     margin: 0;
     li {
       list-style: none;
-      padding-top: 20px;
+      padding-top: 15px;
       &:first-child {
         padding-top: 0;
       }
       h3 {
         margin-bottom: 6px;
-        font-size: 18px;
+        font-size: 16px;
         color: #303133;
       }
       a {
@@ -37,7 +37,7 @@ export default {
         text-decoration: none;
         color: #3b5998;
         p {
-          font-size: 18px;
+          font-size: 14px;
         }
         &:hover {
           text-decoration: underline;

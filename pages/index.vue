@@ -62,6 +62,22 @@ export default {
           excerpt: 'We\'re announcing the next step in the evolution of the Messenger Platform: the ability for brands to incorporate augmented reality into their Messenger experiences.',
           url: '',
           img_url: 'https://cdn.wangcch.cc/demo/demobg.jpg'
+        },
+        {
+          id: 3,
+          date: '2018-05-03T03:24:46+08:00',
+          title: 'Demon 2018: The ak lab test',
+          excerpt: 'We\'re announcing the next step in the evolution of the Messenger Platform: the ability for brands to incorporate augmented reality into their Messenger experiences.',
+          url: '',
+          img_url: 'https://cdn.wangcch.cc/demo/demobg.jpg'
+        },
+        {
+          id: 4,
+          date: '2018-05-03T03:24:46+08:00',
+          title: 'Demon 2018: The ak lab test',
+          excerpt: 'We\'re announcing the next step in the evolution of the Messenger Platform: the ability for brands to incorporate augmented reality into their Messenger experiences.',
+          url: '',
+          img_url: 'https://cdn.wangcch.cc/demo/demobg.jpg'
         }
       ],
 
@@ -101,7 +117,6 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  overflow: hidden;
   .top-show {
     margin: 30px 0;
   }
