@@ -14,6 +14,7 @@ export default {
 
 <style lang="scss" scoped>
 .footer-cr {
+  padding-top: 20px;
   p {
     font-size: 14px;
     color: #303133;
@@ -23,6 +24,9 @@ export default {
       &:hover {
         text-decoration: underline;
       }
+    }
+    @media (max-width: 768px) {
+      text-align: center;
     }
   }
 }

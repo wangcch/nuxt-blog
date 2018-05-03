@@ -1,16 +1,15 @@
 <template>
   <div class="nav-menu">
     <ul>
-      <li><router-link to="/">Home</router-link></li>
-      <li><router-link to="/blog">Blog</router-link></li>
-      <li><router-link to="/about">About</router-link></li>
+      <li v-for="(item, index) in data" :key="item.name + index"><router-link :to="item.url">{{ item.name }}</router-link></li>
     </ul>
   </div>
 </template>
 
 <script>
 export default {
-  name: "nav-menu"
+  name: "nav-menu",
+  props: ['data']
 };
 </script>
 

@@ -73,6 +73,12 @@ export default {
         text-decoration: underline;
       }
     }
+    @media (max-width: 768px) {
+      h2 {
+        font-size: 22px;
+        line-height: 28px;
+      }
+    }
   }
 }
 </style>
