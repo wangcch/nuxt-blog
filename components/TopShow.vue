@@ -2,44 +2,42 @@
   <div class="top-show">
     <el-row>
       <el-col :xs="24" :sm="14" :md="16">
-        <div class="ts-left">
-        </div>
+        <div class="ts-left" :style="formatImgUrl(storyData.img_url)"></div>
       </el-col>
       <el-col :xs="24" :sm="10" :md="8">
         <div class="ts-right">
-          <div class="ts-story_panel">
-            <p class="date">{{ formatDate(storyData.date) }}</p>
-            <h2>{{ storyData.title }}</h2>
-            <p class="excerpt">{{ storyData.excerpt }}</p>
-            <a href="#" class="more">Read More</a>
-          </div>
+          <article-excerpt :data="data"></article-excerpt>
         </div>
       </el-col>
     </el-row>
-    <div class="ts-top-tag">Top Stories</div>
+    <div class="ts-top-tag" v-show="topTag || tagText">{{ tagText ? tagText : 'Top Stories' }}</div>
   </div>
 </template>
 
 <script>
-import moment from 'moment'
+import ArticleExcerpt from '~/components/ArticleExcerpt.vue'
 export default {
   name: "top-show",
+  props: ['data', 'topTag', 'tagText'],
   data () {
     return {
       storyData: {
-        date: '2018-05-03T03:24:46+08:00',
-        title: 'F8 2018: New Tools in Messenger',
-        excerpt: 'We\'re announcing the next step in the evolution of the Messenger Platform: the ability for brands to incorporate augmented reality into their Messenger experiences.',
-        url: ''
+        img_url: 'https://cdn.wangcch.cc/demo/demobg.jpg'
       }
     }
   },
   methods: {
-    formatDate (date) {
-      return moment(date).format('MMM DD, YYYY')
+    formatImgUrl (url) {
+      return 'background: url(' + url + ') no-repeat; background-size: cover; background-position: center;'
     }
   },
   created () {
+    if (this.data) {
+      this.storyData = this.data
+    }
+  },
+  components: {
+    ArticleExcerpt
   }
 };
 </script>
@@ -55,15 +53,14 @@ export default {
     height: 100%;
   }
   .ts-left {
-    // background: #666;
     position: relative;
-    background: url('https://cdn.wangcch.cc/blog/2018-09-16-demo10.jpg') no-repeat;
-    background-size: cover;
-    background-position: center;
   }
   .ts-right {
-    // background: #aaa;
     position: relative;
+    padding: 30px;
+    @media (max-width: 768px) {
+      padding: 20px;
+    }
   }
   .el-row {
     height: 420px;
@@ -105,34 +102,6 @@ export default {
         color: #3b5998 #3b5998 transparent transparent;
         style: solid;
       }
-    }
-  }
-
-  .ts-story_panel {
-    padding: 30px;
-    .date {
-      color: #C0C4CC;
-      margin-bottom: 6px;
-    }
-    h2 {
-      color: #3b5998;
-      font-weight: bold;
-      font-size: 28px;
-      line-height: 36px;
-    }
-    .excerpt {
-      margin: 16px 0;
-      color: #606266;
-      font-weight: 200;
-      line-height: 20px;
-    }
-    .more {
-      white-space: nowrap;
-      color: #3b5998;
-      text-decoration: none;
-    }
-    @media (max-width: 768px) {
-      padding: 20px;
     }
   }
 }
