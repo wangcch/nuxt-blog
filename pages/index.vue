@@ -3,7 +3,7 @@
     <top-show :data="topShow" :topTag="true"></top-show>
     <el-row>
       <el-col :xs="24" :sm="14" :md="16">
-        <div class="blog-list">
+        <div class="blog-list ty-panel">
           <h1 class="blog-list_title">Recent News and Blogs</h1>
           <article-list :data="articleDataList"></article-list>
           <div class="blog-list_more">
@@ -120,16 +120,8 @@ export default {
   .top-show {
     margin: 30px 0;
   }
-  .blog-list, .index-more {
-    padding: 30px;
-    @media (max-width: 768px) {
-      padding: 20px;
-    }
-  }
+
   .blog-list {
-    border: 1px solid #E4E7ED;
-    background: #ffffff;
-    border-radius: 3px;
     .blog-list_title {
       margin: 0 0 20px 0;
       font-size: 22px;
@@ -148,6 +140,10 @@ export default {
     }
   }
   .index-more {
+    padding: 30px;
+    @media (max-width: 768px) {
+      padding: 20px;
+    }
     .index-more_title {
       font-size: 22px;
       color: #303133;

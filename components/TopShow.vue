@@ -58,6 +58,7 @@ export default {
   .ts-right {
     position: relative;
     padding: 30px;
+    overflow: hidden;
     @media (max-width: 768px) {
       padding: 20px;
     }
