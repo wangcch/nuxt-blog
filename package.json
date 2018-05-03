@@ -13,9 +13,11 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
+    "echarts": "^4.1.0",
     "element-ui": "^2.3.6",
     "moment": "^2.22.1",
-    "nuxt": "^1.0.0"
+    "nuxt": "^1.0.0",
+    "v-charts": "^1.16.10"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",
