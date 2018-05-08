@@ -9,6 +9,8 @@
           layout="prev, pager, next"
           v-show="articleTotal > 9"
           :total="articleTotal"
+          @current-change="pageChange"
+          :current-page="nowPage"
           prev-text="Prev"
           next-text="Next"
           style="text-align: center; margin: 30px;">
@@ -30,14 +32,20 @@ export default {
     return {
       articleDataList: [],
       articleTotal: 0,
+      nowPage: 1,
       isLoading: false
     }
   },
   methods: {
+    pageChange (page) {
+      this.nowPage = page
+      this.getData()
+    },
+
     getData () {
       this.isLoading = true
-      ak.getUrlDataParams('article', '' ,true, this, (res, isErr) => {
-        if (!isErr) {
+      ak.getUrlDataParams('article', 'page=' + this.nowPage ,true, this, (res, isErr) => {
+        if (!isErr && res.data.code === 0) {
           this.articleDataList = res.data.data.data
           this.articleTotal = res.data.data.total
           this.isLoading = false

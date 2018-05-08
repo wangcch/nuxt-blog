@@ -2,14 +2,14 @@
   <div class="artcle-excerpt">
     <div class="ts-story_panel">
       <p class="date">{{ formatDate(storyData.create_time) }}</p>
-      <h2><router-link to="">{{ storyData.title }}</router-link></h2>
+      <h2><router-link :to="routerUrl">{{ storyData.title }}</router-link></h2>
       <div class="img" v-show="isDetailed && storyData.img_url">
-        <router-link to="">
+        <router-link :to="routerUrl">
           <img :src="storyData.img_url" alt="">
         </router-link>
       </div>
       <p class="excerpt">{{ storyData.excerpt }}</p>
-      <p class="more"><router-link to="">Read More</router-link></p>
+      <p class="more"><router-link :to="routerUrl">Read More</router-link></p>
       <div class="categories" v-show="isDetailed">
         <p><span class="category" v-show="storyData.category">{{ storyData.category }}</span><span class="tag" v-for="(item, index) in storyData.tags" :key="item + index">{{ item }}</span></p>
       </div>
@@ -30,7 +30,9 @@ export default {
         title: 'Designed By Wangcch',
         excerpt: 'People think focus means saying yes to the thing you’ve got to focus on. But that’s not what it means at all. It means saying no to the hundred other good ideas that there are. You have to pick carefully. I’m actually as proud of the things we haven’t done as the things I have done. Innovation is saying ‘no’ to 1,000 things. — Steve Jobs',
         img_url: 'https://cdn.wangcch.cc/tybg.jpg'
-      }
+      },
+
+      routerUrl: '/blog'
     }
   },
 
@@ -43,6 +45,7 @@ export default {
   created () {
     if (this.data) {
       this.storyData = this.data
+      this.routerUrl = '/article/' + this.storyData.title
     }
   }
 };

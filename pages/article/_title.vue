@@ -1,0 +1,137 @@
+<template>
+  <div class="article">
+    <el-row>
+      <el-col :xs="24" :sm="18">
+        <div class="article-panel ty-panel" v-loading="isLoading">
+          <h1 class="article_title">{{ articleData.title }}</h1>
+          <p class="article_time" v-show="articleData.create_time">{{ formatDate(articleData.create_time) }} <span class="article_author">{{ articleData.author }}</span></p>
+          <p class="article_time" v-show="articleData.update_time">{{ formatDate(articleData.update_time) }}</p>
+          <p class="article_more" v-show="articleData.category"><span class="article_category">{{ articleData.category }}</span><span class="article_tag" v-for="(tag, index) in articleData.tags" :key="'tag' + tag + index">{{ tag }}</span></p>
+          <div class="article_img" v-show="articleData.img_url">
+            <img :src="articleData.img_url" :alt="articleData.title">
+          </div>
+          <div class="article_content" v-html="articleContentHtml"></div>
+        </div>
+      </el-col>
+      <el-col :xs="24" :sm="6">
+        <div class="article-more">
+        </div>
+      </el-col>
+    </el-row>
+  </div>
+</template>
+
+<script>
+import ak from '~/assets/lib/ak.js'
+import moment from 'moment'
+export default {
+  data () {
+    return {
+      articleData: {},
+      articleContentHtml: '',
+      isLoading: false,
+      searchTitle: this.$route.params.title
+    }
+  },
+  methods: {
+    formatDate (date) {
+      return moment(date).format('YYYY/MM/DD HH:mm')
+    },
+
+    makedownToHtml (callback) {
+      import('showdown').then(showdown => {
+        const converter = new showdown.Converter()
+        callback(converter.makeHtml(this.articleData.excerpt + this.articleData.content))
+      })
+    },
+
+    getData () {
+      this.isLoading = true
+      ak.getUrlDataParams('article', 'title=' + this.searchTitle , true, this, (res, isErr) => {
+        if (!isErr && res.data.code === 0) {
+          this.articleData = res.data.data
+          console.log(this.articleData)
+          this.makedownToHtml((data) => {
+            this.articleContentHtml = data
+            console.log(this.articleContentHtml)
+            this.isLoading = false
+          })
+        } else {
+          this.isLoading = false
+          this.$message.error(res.data.error)
+        }
+      })
+    }
+  },
+  created () {
+    this.getData()
+  },
+  components: {
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+.article {
+  .article-panel {
+    margin-top: 30px;
+    overflow: hidden;
+    color: #303133;
+  }
+
+  .article_title {
+    font-size: 26px;
+    margin: 0 0 10px 0;
+  }
+
+  .article_time {
+    color: #909399;
+  }
+  .article_author {
+    color: #606266;
+    margin-left: 10px;
+  }
+
+  .article_more {
+    margin-top: 10px;
+    color: #606266;
+    .article_category {
+      border: 1px solid #DCDFE6;
+      font-size: 14px;
+      padding: 0 6px;
+      margin-right: 10px;
+    }
+    .article_tag {
+      font-size: 12px;
+      margin-left: 6px;
+      background: #C0C4CC;
+      color: #ffffff;
+      padding: 2px 6px;
+      border-radius: 10px;
+    }
+  }
+
+  .article_img {
+    margin: 20px -30px 0 -30px;
+    @media (max-width: 768px) {
+      margin: 20px -20px 0 -20px;
+    }
+    img {
+      box-shadow: 0 3px 20px rgba(#000, 0.5);
+      width: 100%;
+    }
+  }
+
+  .article_content {
+    color: #303133;
+    word-break: break-word;
+    margin-top: 20px;
+  }
+  
+  .article-more {
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+}
+</style>

@@ -71,8 +71,8 @@ export default {
   methods: {
     getData () {
       this.isLoading = true
-      ak.getUrlDataParams('article', '' ,true, this, (res, isErr) => {
-        if (!isErr) {
+      ak.getUrlDataParams('article', 'count=5' ,true, this, (res, isErr) => {
+        if (!isErr && res.data.code === 0) {
           this.articleDataList = res.data.data.data
           this.isLoading = false
         } else {
