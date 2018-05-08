@@ -37,13 +37,26 @@ module.exports = {
   },
 
   vender:[
-    'element-ui'
+    'element-ui',
+    'axios'
   ],
 
   plugins: [
     { src: '~plugins/element-ui', ssr: true },
-    { src: '~plugins/charts' },
+    { src: '~plugins/charts' }
   ],
+  
+  modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/proxy'
+  ],
+
+  proxy: {
+    '/api': {
+      target: 'http://localhost:5001',
+      ws: false
+    }
+  },
 
   css: [
     // element样式全局引用

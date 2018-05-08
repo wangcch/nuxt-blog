@@ -1,10 +1,18 @@
 <template>
   <div class="blog">
     <el-row>
-      <el-col :xs="24" :sm="14" :md="16">
-        <div class="blog-panel ty-panel" v-for="(item, index) in articleDataList" :key="item.id + index">
+      <el-col :xs="24" :sm="14" :md="16" v-loading="isLoading">
+        <div class="blog-panel ty-panel" v-for="(item, index) in articleDataList" :key="'artcile' + item.id + index">
           <article-excerpt :data="item" :isDetailed="true"></article-excerpt>
         </div>
+        <el-pagination
+          layout="prev, pager, next"
+          v-show="articleTotal > 9"
+          :total="articleTotal"
+          prev-text="Prev"
+          next-text="Next"
+          style="text-align: center; margin: 30px;">
+        </el-pagination>
       </el-col>
       <el-col :xs="24" :sm="10" :md="8">
         <div class="blog-more">
@@ -15,53 +23,33 @@
 </template>
 
 <script>
+import ak from '~/assets/lib/ak.js'
 import ArticleExcerpt from '~/components/ArticleExcerpt.vue'
 export default {
   data () {
     return {
-       articleDataList: [
-        {
-          id: 0,
-          date: '2018-05-03T03:24:46+08:00',
-          title: 'Demon 2018: The ak lab test',
-          excerpt: 'We\'re announcing the next step in the evolution of the Messenger Platform: the ability for brands to incorporate augmented reality into their Messenger experiences.',
-          url: '',
-          img_url: 'https://cdn.wangcch.cc/demo/demobg.jpg',
-          categories: ['cate1', 'cate2']
-        },
-        {
-          id: 1,
-          date: '2018-05-03T03:24:46+08:00',
-          title: 'Demon 2018: The ak lab test',
-          excerpt: 'We\'re announcing the next step in the evolution of the Messenger Platform: the ability for brands to incorporate augmented reality into their Messenger experiences.',
-          url: '',
-          categories: ['cate1', 'cate2']
-        },
-        {
-          id: 2,
-          date: '2018-05-03T03:24:46+08:00',
-          title: 'Demon 2018: The ak lab test',
-          excerpt: 'We\'re announcing the next step in the evolution of the Messenger Platform: the ability for brands to incorporate augmented reality into their Messenger experiences.',
-          url: ''
-        },
-        {
-          id: 3,
-          date: '2018-05-03T03:24:46+08:00',
-          title: 'Demon 2018: The ak lab test',
-          excerpt: 'We\'re announcing the next step in the evolution of the Messenger Platform: the ability for brands to incorporate augmented reality into their Messenger experiences.',
-          url: '',
-          img_url: 'https://cdn.wangcch.cc/tybg.jpg'
-        },
-        {
-          id: 4,
-          date: '2018-05-03T03:24:46+08:00',
-          title: 'Demon 2018: The ak lab test',
-          excerpt: 'We\'re announcing the next step in the evolution of the Messenger Platform: the ability for brands to incorporate augmented reality into their Messenger experiences.',
-          url: '',
-          img_url: 'https://cdn.wangcch.cc/demo/demobg.jpg'
-        }
-      ],
+      articleDataList: [],
+      articleTotal: 0,
+      isLoading: false
     }
+  },
+  methods: {
+    getData () {
+      this.isLoading = true
+      ak.getUrlDataParams('article', '' ,true, this, (res, isErr) => {
+        if (!isErr) {
+          this.articleDataList = res.data.data.data
+          this.articleTotal = res.data.data.total
+          this.isLoading = false
+        } else {
+          this.isLoading = false
+          this.$message.error(res.data.data)
+        }
+      })
+    }
+  },
+  created () {
+    this.getData()
   },
   components: {
     ArticleExcerpt

@@ -1,7 +1,7 @@
 <template>
   <div class="artcle-excerpt">
     <div class="ts-story_panel">
-      <p class="date">{{ formatDate(storyData.date) }}</p>
+      <p class="date">{{ formatDate(storyData.create_time) }}</p>
       <h2><router-link to="">{{ storyData.title }}</router-link></h2>
       <div class="img" v-show="isDetailed && storyData.img_url">
         <router-link to="">
@@ -10,9 +10,10 @@
       </div>
       <p class="excerpt">{{ storyData.excerpt }}</p>
       <p class="more"><router-link to="">Read More</router-link></p>
-      <div class="categories" v-show="isDetailed && storyData.categories">
-        <p>Category: <span v-for="(item, index) in storyData.categories" :key="item + index">{{ item }}</span></p>
+      <div class="categories" v-show="isDetailed">
+        <p><span class="category" v-show="storyData.category">{{ storyData.category }}</span><span class="tag" v-for="(item, index) in storyData.tags" :key="item + index">{{ item }}</span></p>
       </div>
+      <p class="author" v-show="isDetailed && storyData.author"><small>by</small>&nbsp;{{ storyData.author }}</p>
     </div>
   </div>
 </template>
@@ -25,7 +26,7 @@ export default {
   data () {
     return {
       storyData: {
-        date: '2018-05-03T03:24:46+08:00',
+        create_time: '2018-05-03T03:24:46+08:00',
         title: 'Designed By Wangcch',
         excerpt: 'People think focus means saying yes to the thing you’ve got to focus on. But that’s not what it means at all. It means saying no to the hundred other good ideas that there are. You have to pick carefully. I’m actually as proud of the things we haven’t done as the things I have done. Innovation is saying ‘no’ to 1,000 things. — Steve Jobs',
         img_url: 'https://cdn.wangcch.cc/tybg.jpg'
@@ -57,7 +58,7 @@ export default {
     h2 {
       color: #3b5998;
       font-weight: bold;
-      font-size: 28px;
+      font-size: 26px;
       line-height: 36px;
       a {
         color: #3b5998;
@@ -101,22 +102,24 @@ export default {
       p {
         font-size: 14px;
         color: #909399;
-        span {
-          color: #606266;
-          position: relative;
-          margin-left: 10px;
-          &:first-child {
-            margin-left: 0;
-            &::before {
-              display: none;
-            }
-          }
-          &::before {
-            content: '-';
-            position: absolute;
-            left: -8px;
-          }
+        .category {
+          margin-right: 5px;
         }
+        .tag {
+          margin-right: 5px;
+          border: 1px solid #E4E7ED;
+          padding: 0 6px;
+          border-radius: 10px;
+        }
+      }
+    }
+    .author {
+      margin-top: 10px;
+      font-size: 16px;
+      text-align: right;
+      color: #303133;
+      small {
+        color: #606266;
       }
     }
     @media (max-width: 768px) {

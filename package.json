@@ -20,6 +20,8 @@
     "v-charts": "^1.16.10"
   },
   "devDependencies": {
+    "@nuxtjs/axios": "^5.3.1",
+    "@nuxtjs/proxy": "^1.2.4",
     "babel-eslint": "^8.2.1",
     "css-loader": "^0.28.11",
     "eslint": "^4.15.0",
