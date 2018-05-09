@@ -1,6 +1,6 @@
 <template>
   <div class="artcle-excerpt">
-    <div class="ts-story_panel">
+    <div class="ts-story_panel" v-show="!isLoading">
       <p class="date">{{ formatDate(storyData.create_time) }}</p>
       <h2><router-link :to="routerUrl">{{ storyData.title }}</router-link></h2>
       <div class="img" v-show="isDetailed && storyData.img_url">
@@ -8,7 +8,8 @@
           <img :src="storyData.img_url" alt="">
         </router-link>
       </div>
-      <p class="excerpt">{{ storyData.excerpt }}</p>
+      <div class="excerpt" v-show="storyData.excerpt" id="article_content" v-html="storyData.excerpt">
+      </div>
       <p class="more"><router-link :to="routerUrl">Read More</router-link></p>
       <div class="categories" v-show="isDetailed">
         <p><span class="category" v-show="storyData.category">{{ storyData.category }}</span><span class="tag" v-for="(item, index) in storyData.tags" :key="item + index">{{ item }}</span></p>
@@ -19,6 +20,7 @@
 </template>
 
 <script>
+import ak from '~/assets/lib/ak.js'
 import moment from 'moment'
 export default {
   name: "artcle-excerpt",
@@ -32,6 +34,8 @@ export default {
         img_url: 'https://cdn.wangcch.cc/tybg.jpg'
       },
 
+      isLoading: false,
+
       routerUrl: '/blog'
     }
   },
@@ -44,8 +48,18 @@ export default {
 
   created () {
     if (this.data) {
-      this.storyData = this.data
-      this.routerUrl = '/article/' + this.storyData.title
+      if (this.data.excerpt) {
+        this.isLoading = true
+        ak.makedownToHtml(this.data.excerpt, (toHtmlData) => {
+          let data = this.data
+          data.excerpt = toHtmlData
+          this.storyData = data
+          this.isLoading = false
+        })
+      } else {
+        this.storyData = this.data
+      }
+      this.routerUrl = '/article/' + this.data.title
     }
   }
 };
@@ -84,9 +98,6 @@ export default {
     }
     .excerpt {
       margin: 16px 0;
-      color: #606266;
-      font-weight: 200;
-      line-height: 20px;
     }
     .more {
       a {
