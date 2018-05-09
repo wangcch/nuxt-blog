@@ -1,11 +1,11 @@
 #article_content {
   h2 {
     font-size: 22px;
-    margin: 10px 0;
+    margin: 15px 0;
   }
   h3 {
     font-size: 20px;
-    margin: 5px 0;
+    margin: 10px 0;
   }
   h4 h5, h6 {
     font-size: 16px;
@@ -21,6 +21,9 @@
       background: #DCDFE6;
       border-radius: 3px;
       padding: 0 3px;
+    }
+    a {
+      color: #4e74c5;
     }
   }
   table {
@@ -54,12 +57,14 @@
       }
     }
   }
+  pre {
+    position: relative;
+  }
   code {
     font-size: 14px;
     line-height: 16px;
     border-radius: 3px;
     background: #e9eaed;
-    position: relative;
     &::before {
       position: absolute;
       right: 5px;

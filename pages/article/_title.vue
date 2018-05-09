@@ -43,10 +43,8 @@ export default {
       ak.getUrlDataParams('article', 'title=' + this.searchTitle , true, this, (res, isErr) => {
         if (!isErr && res.data.code === 0) {
           this.articleData = res.data.data
-          console.log(this.articleData)
           ak.makedownToHtml(this.articleData.excerpt + this.articleData.content, (data) => {
             this.articleContentHtml = data
-            console.log(this.articleContentHtml)
             this.isLoading = false
           })
         } else {
