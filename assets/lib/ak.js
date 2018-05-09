@@ -6,25 +6,25 @@ const urlPrefix = '/api/aklab/'
 
 let ak = {}
 
-const interceptors = () => {
-  axios.interceptors.request.use((config) => {
-    return config
-  }, function (error) {
-    return Promise.reject(error)
-  })
+// const interceptors = () => {
+//   axios.interceptors.request.use((config) => {
+//     return config
+//   }, function (error) {
+//     return Promise.reject(error)
+//   })
 
-  axios.interceptors.response.use((response) => {
-    if (response.data.code === 2) {
-    //   router.replace('/login')
-    }
-    return response
-  }, function (error) {
-    if (error.response.status > 500) {
-    //   router.replace('/err500')
-    }
-    return Promise.reject(error)
-  })
-}
+//   axios.interceptors.response.use((response) => {
+//     if (response.data.code === 2) {
+//     //   router.replace('/login')
+//     }
+//     return response
+//   }, function (error) {
+//     if (error.response.status > 500) {
+//     //   router.replace('/err500')
+//     }
+//     return Promise.reject(error)
+//   })
+// }
 
 const notifyWarning = (self, res) => {
   self.$notify.warning({
@@ -36,7 +36,7 @@ const notifyWarning = (self, res) => {
 
 ak.getUrlDataParams = (getfix, paramsStr, isShowError, self, callback) => {
   const url = paramsStr === '' ? (urlPrefix + getfix) : (urlPrefix + getfix + '?' + paramsStr)
-  interceptors()
+//   interceptors()
   axios.get(url)
     .then(res => {
       callback(res)
@@ -53,7 +53,7 @@ ak.getUrlDataParams = (getfix, paramsStr, isShowError, self, callback) => {
 }
 
 ak.postUrlData = (postfix, data, self, callback) => {
-  interceptors()
+//   interceptors()
   axios.post(urlPrefix + postfix, qs.stringify(data))
     .then(res => {
       callback(res)

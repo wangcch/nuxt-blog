@@ -1,22 +1,30 @@
 <template>
   <div class="author">
-    <div class="author-panel ty-panel userinfo-panel" v-loading="isUserLoading">
-      <el-row>
-        <el-col :xs="24" :sm="10">
-          <div class="user_count">{{ userInfo.article_count }}</div>
-        </el-col>
-        <el-col :xs="24" :sm="14">
-          <div class="user-item user_name">{{ userInfo.username }}</div>
-          <div class="user-item user_email">{{ userInfo.email }}</div>
-          <div class="user-item user_create_time" v-show="userInfo.create_time">{{ formatDate(userInfo.create_time) }}</div>
-        </el-col>
-      </el-row>
-    </div>
-    <div class="author-panel ty-panel" v-loading="isArticleLoading">
-      <div class="author-article" v-for="(item, index) in articleData" :key="'art' + item.title + index">
-        <article-excerpt :data="item"></article-excerpt>
-      </div>
-    </div>
+    <el-row>
+      <el-col :xs="24" :sm="14" :md="16">
+        <div class="author-panel ty-panel userinfo-panel" v-loading="isUserLoading">
+          <el-row>
+            <el-col :xs="24" :sm="10">
+              <div class="user_count">{{ userInfo.article_count }}</div>
+            </el-col>
+            <el-col :xs="24" :sm="14">
+              <div class="user-item user_name">{{ userInfo.username }}</div>
+              <div class="user-item user_email">{{ userInfo.email }}</div>
+              <div class="user-item user_create_time" v-show="userInfo.create_time">{{ formatDate(userInfo.create_time) }}</div>
+            </el-col>
+          </el-row>
+        </div>
+        <div class="author-panel ty-panel" v-loading="isArticleLoading">
+          <div class="author-article" v-for="(item, index) in articleData" :key="'art' + item.title + index">
+            <article-excerpt :data="item"></article-excerpt>
+          </div>
+        </div>
+      </el-col>
+      <el-col :xs="24" :sm="10" :md="8">
+        <div class="author-more">
+        </div>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -39,7 +47,7 @@ export default {
       return moment(date).format('YYYY/MM/DD')
     },
 
-    getData () {
+    async getData () {
       this.isUserLoading = true
       this.isArticleLoading = true
       ak.getUrlDataParams('user/info', 'username=' + this.searchAuthor, true, this, (res, isErr) => {
@@ -77,6 +85,11 @@ export default {
     margin-top: 30px;
     overflow: hidden;
     color: #303133;
+  }
+  .author-more {
+    @media (max-width: 768px) {
+      display: none;
+    }
   }
   .userinfo-panel {
     .el-row {

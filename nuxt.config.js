@@ -1,3 +1,5 @@
+const apiConf = require('./api.conf')
+
 module.exports = {
   /*
   ** Headers of the page
@@ -44,7 +46,8 @@ module.exports = {
   plugins: [
     { src: '~plugins/element-ui', ssr: true },
     { src: '~plugins/charts' },
-    { src: '~plugins/hl' }
+    { src: '~plugins/hl' },
+    { src: '~plugins/axios' }
   ],
   
   modules: [
@@ -52,9 +55,15 @@ module.exports = {
     '@nuxtjs/proxy'
   ],
 
+  axios: {
+    baseURL: apiConf.baseUrl,
+    proxyHeaders: false,
+    credentials: false
+  },
+
   proxy: {
     '/api': {
-      target: 'http://localhost:5001',
+      target: apiConf.baseUrl,
       ws: false
     }
   },
