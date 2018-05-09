@@ -10,7 +10,7 @@
           <div class="article_img" v-show="articleData.img_url">
             <img :src="articleData.img_url" :alt="articleData.title">
           </div>
-          <div class="article_content" v-html="articleContentHtml"></div>
+          <div class="article_content" id="article_content" v-html="articleContentHtml" v-highlightjs></div>
         </div>
       </el-col>
       <el-col :xs="24" :sm="6">
@@ -38,20 +38,13 @@ export default {
       return moment(date).format('YYYY/MM/DD HH:mm')
     },
 
-    makedownToHtml (callback) {
-      import('showdown').then(showdown => {
-        const converter = new showdown.Converter()
-        callback(converter.makeHtml(this.articleData.excerpt + this.articleData.content))
-      })
-    },
-
     getData () {
       this.isLoading = true
       ak.getUrlDataParams('article', 'title=' + this.searchTitle , true, this, (res, isErr) => {
         if (!isErr && res.data.code === 0) {
           this.articleData = res.data.data
           console.log(this.articleData)
-          this.makedownToHtml((data) => {
+          ak.makedownToHtml(this.articleData.excerpt + this.articleData.content, (data) => {
             this.articleContentHtml = data
             console.log(this.articleContentHtml)
             this.isLoading = false
@@ -124,8 +117,10 @@ export default {
 
   .article_content {
     color: #303133;
-    word-break: break-word;
     margin-top: 20px;
+    p {
+      word-break: break-word;
+    }
   }
   
   .article-more {

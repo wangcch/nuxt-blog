@@ -43,7 +43,8 @@ module.exports = {
 
   plugins: [
     { src: '~plugins/element-ui', ssr: true },
-    { src: '~plugins/charts' }
+    { src: '~plugins/charts' },
+    { src: '~plugins/hl' }
   ],
   
   modules: [
@@ -61,6 +62,7 @@ module.exports = {
   css: [
     // element样式全局引用
     'element-ui/lib/theme-chalk/index.css',
+    'highlight.js/styles/xcode.css',
     { src: '~assets/style/index.scss', lang: 'scss' }
   ]
  

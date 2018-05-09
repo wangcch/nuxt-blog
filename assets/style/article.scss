@@ -1,0 +1,170 @@
+#article_content {
+  h2 {
+    font-size: 22px;
+    margin: 10px 0;
+  }
+  h3 {
+    font-size: 20px;
+    margin: 5px 0;
+  }
+  h4 h5, h6 {
+    font-size: 16px;
+    margin: 5px 0;
+  }
+  p, pre {
+    margin-top: 10px;
+    color: #303133;
+  }
+  p {
+    code {
+      color: #3b5998;
+      background: #DCDFE6;
+      border-radius: 3px;
+      padding: 0 3px;
+    }
+  }
+  table {
+    margin: 20px 0;
+    width: 100%;
+    tr {
+      th {
+        background: #C0C4CC;
+        padding: 5px 10px;
+        font-size: 14px;
+        border: {
+          width: 1px 1px 0 0;
+          style: solid;
+          color: #DCDFE6;
+        }
+        &:first-child {
+          border-left: 1px solid #DCDFE6;
+        }
+      }
+      td {
+        padding: 3px 10px;
+        font-size: 14px;
+        border: {
+          width: 0 1px 1px 0;
+          style: solid;
+          color: #DCDFE6;
+        }
+        &:first-child {
+          border-left: 1px solid #DCDFE6;
+        }
+      }
+    }
+  }
+  code {
+    font-size: 14px;
+    line-height: 16px;
+    border-radius: 3px;
+    background: #e9eaed;
+    position: relative;
+    &::before {
+      position: absolute;
+      right: 5px;
+      top: 5px;
+      color: #606266;
+    }
+    &.js {
+      &::before {
+        content: 'js';
+      }
+    }
+    &.html {
+      &::before {
+        content: 'html';
+      }
+    }
+    &.css {
+      &::before {
+        content: 'css';
+      }
+    }
+    &.scss {
+      &::before {
+        content: 'scss';
+      }
+    }
+    &.sass {
+      &::before {
+        content: 'sass';
+      }
+    }
+    &.less {
+      &::before {
+        content: 'less';
+      }
+    }
+    &.stylus {
+      &::before {
+        content: 'stylus';
+      }
+    }
+    &.shell {
+      &::before {
+        content: 'shell';
+      }
+    }
+    &.json {
+      &::before {
+        content: 'json';
+      }
+    }
+    &.java {
+      &::before {
+        content: 'java';
+      }
+    }
+    &.python {
+      &::before {
+        content: 'python';
+      }
+    }
+    &.c {
+      &::before {
+        content: 'c';
+      }
+    }
+    &.php {
+      &::before {
+        content: 'php';
+      }
+    }
+  }
+
+
+  ul,ol {
+    margin: 10px 0;
+    li {
+      list-style-type: decimal;
+      font-size: 14px;
+      color: #606266;
+      line-height: 18px;
+      padding: 0;
+    }
+  }
+
+  blockquote {
+    position: relative;
+    padding: 10px 0 10px 20px;
+    margin: 10px 0;
+    font-size: 14px;
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      border-left: 5px solid #DCDFE6;
+    }
+    p {
+      margin: 0;
+      color: #606266;
+    }
+  }
+
+  hr {
+    margin: 30px 0;
+  }
+}

@@ -76,4 +76,11 @@ ak.formatDate = (date) => {
   return moment(date).format('YYYY/MM/DD h:mm:ss')
 }
 
+ak.makedownToHtml = (data, callback) => {
+    import('showdown').then(showdown => {
+        const converter = new showdown.Converter({tables: true, strikethrough: true})
+        callback(converter.makeHtml(data))
+    })
+}
+
 export default ak
