@@ -13,7 +13,7 @@
       <div class="categories" v-show="isDetailed">
         <p><span class="category" v-show="storyData.category">{{ storyData.category }}</span><span class="tag" v-for="(item, index) in storyData.tags" :key="item + index">{{ item }}</span></p>
       </div>
-      <p class="author" v-show="isDetailed && storyData.author"><small>by</small>&nbsp;{{ storyData.author }}</p>
+      <p class="author" v-show="isDetailed && storyData.author"><small>by</small>&nbsp;<router-link :to="'/author/' + storyData.author">{{ storyData.author }}</router-link></p>
     </div>
   </div>
 </template>
@@ -123,6 +123,13 @@ export default {
       color: #303133;
       small {
         color: #606266;
+      }
+      a {
+        color: #303133;
+        text-decoration: none;
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
     @media (max-width: 768px) {

@@ -4,7 +4,7 @@
       <el-col :xs="24" :sm="18">
         <div class="article-panel ty-panel" v-loading="isLoading">
           <h1 class="article_title">{{ articleData.title }}</h1>
-          <p class="article_time" v-show="articleData.create_time">{{ formatDate(articleData.create_time) }} <span class="article_author">{{ articleData.author }}</span></p>
+          <p class="article_time" v-show="articleData.create_time">{{ formatDate(articleData.create_time) }} <span class="article_author"><router-link :to="'/author/' + articleData.author">{{ articleData.author }}</router-link></span></p>
           <p class="article_time" v-show="articleData.update_time">{{ formatDate(articleData.update_time) }}</p>
           <p class="article_more" v-show="articleData.category"><span class="article_category">{{ articleData.category }}</span><span class="article_tag" v-for="(tag, index) in articleData.tags" :key="'tag' + tag + index">{{ tag }}</span></p>
           <div class="article_img" v-show="articleData.img_url">
@@ -81,6 +81,13 @@ export default {
   .article_author {
     color: #606266;
     margin-left: 10px;
+    a {
+      color: #3b5998;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 
   .article_more {

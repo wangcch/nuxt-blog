@@ -73,7 +73,7 @@ ak.postUrlData = (postfix, data, self, callback) => {
 }
 
 ak.formatDate = (date) => {
-  return moment(date).format('YYYY/MM/DD h:mm:ss')
+  return moment(date).format('YYYY/MM/DD HH:mm:ss')
 }
 
 ak.makedownToHtml = (data, callback) => {
