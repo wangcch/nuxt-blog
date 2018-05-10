@@ -144,12 +144,9 @@ export default {
   }
   
   .article-more {
-    margin-top: 20px;
+    margin-top: 30px;
     margin-left: 20px;
     transition: all 0.3s;
-    &:first-child {
-      margin-top: 30px;
-    }
     @media (max-width: 768px) {
       margin: 10px 0 0 0;
     }

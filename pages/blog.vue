@@ -17,8 +17,17 @@
         </el-pagination>
       </el-col>
       <el-col :xs="24" :sm="10" :md="8">
-        <div class="blog-more ty-panel" v-show="categories">
-          <div class="blog-more_category" v-for="(item, index) in categories" :key="'cate' + item + index">{{ item }}</div>
+        <div class="blog-more ty-panel" v-show="categories.length">
+          <div class="blog-more_title">
+            <h2>Category</h2>
+            <el-button v-show="selectCategory" @click="cleanSelectCategory" size="mini" icon="el-icon-circle-close-outline"></el-button>
+          </div>
+          <!-- <div class="blog-more_category" v-for="(item, index) in categories" :key="'cate' + item + index">{{ item }}</div> -->
+          <div>
+            <el-radio-group v-model="selectCategory" @change="changeCategory">
+              <el-radio class="blog-more_category" :label="item" border v-for="(item, index) in categories" :key="'cate' + item + index">{{ item }}</el-radio>
+            </el-radio-group>
+          </div>
         </div>
       </el-col>
     </el-row>
@@ -35,10 +44,20 @@ export default {
       articleTotal: 0,
       nowPage: 1,
       isLoading: false,
-      categories: []
+      categories: [],
+      selectCategory: ''
     }
   },
   methods: {
+    cleanSelectCategory () {
+      this.selectCategory = ''
+      this.getData()
+    },
+    changeCategory (val) {
+      this.selectCategory = val
+      this.getData()
+    },
+
     pageChange (page) {
       this.nowPage = page
       this.getData()
@@ -56,7 +75,8 @@ export default {
 
     getData () {
       this.isLoading = true
-      ak.getUrlDataParams('article', 'page=' + this.nowPage ,true, this, (res, isErr) => {
+      let paramStr =  this.selectCategory ? ('page=' + this.nowPage + '&category=' + this.selectCategory) : ('page=' + this.nowPage)
+      ak.getUrlDataParams('article', paramStr,true, this, (res, isErr) => {
         if (!isErr && res.data.code === 0) {
           this.articleDataList = res.data.data.data
           this.articleTotal = res.data.data.total
@@ -90,24 +110,24 @@ export default {
     @media (max-width: 768px) {
       display: none;
     }
-    .blog-more_category {
-      border: 1px solid #DCDFE6;
-      border-radius: 3px;
+    .blog-more_title {
+      color: #303133;
       overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      padding: 6px 10px;
-      margin-top: 10px;
-      &:first-child {
-        margin-top: 0;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      h2 {
+        flex: 1;
+        padding: 5px 0;
       }
+    }
+    .blog-more_category {
+      width: 100%;
+      margin: 10px 0 0 0;
       a {
         display: block;
         text-decoration: none;
         color: #303133;
-      }
-      &:hover {
-        border-color: #303133;
       }
     }
   }
