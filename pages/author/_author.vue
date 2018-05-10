@@ -14,7 +14,7 @@
             </el-col>
           </el-row>
         </div>
-        <div class="author-panel ty-panel" v-loading="isArticleLoading">
+        <div class="author-panel ty-panel animated fadeIn" v-loading="isArticleLoading">
           <div class="author-article" v-for="(item, index) in articleData" :key="'art' + item.title + index">
             <article-excerpt :data="item"></article-excerpt>
           </div>

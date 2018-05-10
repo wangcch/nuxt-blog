@@ -1,9 +1,9 @@
 <template>
   <section class="container">
-    <top-show :data="topShow" :topTag="true"></top-show>
+    <top-show :data="topShow" :topTag="true" class="animated fadeIn"></top-show>
     <el-row>
       <el-col :xs="24" :sm="14" :md="16">
-        <div class="blog-list ty-panel" v-loading="isLoading">
+        <div class="blog-list ty-panel animated fadeInUp" v-loading="isLoading">
           <h1 class="blog-list_title">Recent News and Blogs</h1>
           <article-list :data="articleDataList"></article-list>
           <div class="blog-list_more">
@@ -12,7 +12,7 @@
         </div>
       </el-col>
       <el-col :xs="24" :sm="10" :md="8">
-        <div class="index-more">
+        <div class="index-more animated fadeIn">
           <h2 class="index-more_title">More</h2>
           <link-share :data="moreLink"></link-share>
           <h2 class="index-more_title">Links</h2>

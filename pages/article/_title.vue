@@ -2,7 +2,7 @@
   <div class="article">
     <el-row>
       <el-col :xs="24" :sm="18">
-        <div class="article-panel ty-panel" v-loading="isLoading">
+        <div class="article-panel ty-panel animated fadeIn" v-loading="isLoading">
           <h1 class="article_title">{{ articleData.title }}</h1>
           <p class="article_time" v-show="articleData.create_time">{{ formatDate(articleData.create_time) }} <span class="article_author"><router-link :to="'/author/' + articleData.author">{{ articleData.author }}</router-link></span></p>
           <p class="article_time" v-show="articleData.update_time">{{ formatDate(articleData.update_time) }}</p>
@@ -15,16 +15,16 @@
       </el-col>
       <el-col :xs="24" :sm="6">
         <div class="article-more ty-panel_nopadding" v-show="prevTitle">
-          <router-link :to="'/article/' + prevTitle">
+          <nuxt-link :to="'/article/' + prevTitle">
             <p class="sub">Prev</p>
             <p class="title">{{ prevTitle }}</p>
-          </router-link>
+          </nuxt-link>
         </div>
         <div class="article-more ty-panel_nopadding" v-show="nextTitle">
-          <router-link :to="'/article/' + nextTitle">
+          <nuxt-link :to="'/article/' + nextTitle">
             <p class="sub">Next</p>
             <p class="title">{{ nextTitle }}</p>
-          </router-link>
+          </nuxt-link>
         </div>
       </el-col>
     </el-row>

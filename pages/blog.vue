@@ -2,7 +2,7 @@
   <div class="blog">
     <el-row>
       <el-col :xs="24" :sm="14" :md="16" v-loading="isLoading">
-        <div class="blog-panel ty-panel" v-for="(item, index) in articleDataList" :key="'artcile' + item.id + index">
+        <div class="blog-panel ty-panel animated fadeInUp" v-for="(item, index) in articleDataList" :key="'artcile' + item.id + index">
           <article-excerpt :data="item" :isDetailed="true"></article-excerpt>
         </div>
         <el-pagination
@@ -17,7 +17,7 @@
         </el-pagination>
       </el-col>
       <el-col :xs="24" :sm="10" :md="8">
-        <div class="blog-more ty-panel" v-show="categories.length">
+        <div class="blog-more ty-panel animated fadeIn" v-show="categories.length">
           <div class="blog-more_title">
             <h2>Category</h2>
             <el-button v-show="selectCategory" @click="cleanSelectCategory" size="mini" icon="el-icon-circle-close-outline"></el-button>

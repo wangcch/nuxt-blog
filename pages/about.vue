@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <div class="about-charts ty-panel">
+    <div class="about-charts ty-panel animated fadeIn">
       <el-row :gutter="10">
         <el-col :xs="24" :sm="10">
           <ve-pie :data="chartData" :settings="chartSettings" :colors="colors"></ve-pie>
