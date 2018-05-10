@@ -1,15 +1,23 @@
 <template>
   <div class="nav-menu">
-    <ul>
-      <li v-for="(item, index) in data" :key="item.name + index"><router-link :to="item.url">{{ item.name }}</router-link></li>
-    </ul>
+    <el-menu :default-active="activeUrl" mode="horizontal" router>
+      <el-menu-item :index="item.url" v-for="(item, index) in data" :key="item.name + index">{{ item.name }}</el-menu-item>
+    </el-menu>
   </div>
 </template>
 
 <script>
 export default {
   name: "nav-menu",
-  props: ['data']
+  props: ['data'],
+  data () {
+    return {
+      activeUrl: '/'
+    }
+  },
+  created () {
+    this.activeUrl = this.$router.history.current.path
+  }
 };
 </script>
 
@@ -20,19 +28,6 @@ export default {
     height: 100%;
     display: flex;
     justify-content: flex-end;
-    align-items: center;
-    padding: 0;
-    li {
-      list-style: none;
-      margin-left: 20px;
-      &:first-child {
-        margin-left: 0;
-      }
-    }
-    a {
-      text-decoration: none;
-      color: #303133;
-    }
   }
 }
 </style>

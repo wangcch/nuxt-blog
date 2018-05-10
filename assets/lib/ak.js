@@ -39,13 +39,13 @@ ak.getUrlDataParams = (getfix, paramsStr, isShowError, self, callback) => {
 //   interceptors()
   axios.get(url)
     .then(res => {
-      callback(res)
+      callback(res, false)
     }).catch(error => {
       if (error.response) {
         if (isShowError) {
           notifyWarning(self, error.response)
         }
-        callback(error.response)
+        callback(error.response, false)
       } else {
         callback(error, true)
       }
@@ -56,12 +56,12 @@ ak.postUrlData = (postfix, data, self, callback) => {
 //   interceptors()
   axios.post(urlPrefix + postfix, qs.stringify(data))
     .then(res => {
-      callback(res)
+      callback(res, false)
     })
     .catch(error => {
       if (error.response) {
         notifyWarning(self, error.response)
-        callback(error.response)
+        callback(error.response, false)
       } else {
         self.$notify.error({
           title: 'Error',
