@@ -17,7 +17,8 @@
         </el-pagination>
       </el-col>
       <el-col :xs="24" :sm="10" :md="8">
-        <div class="blog-more">
+        <div class="blog-more ty-panel" v-show="categories">
+          <div class="blog-more_category" v-for="(item, index) in categories" :key="'cate' + item + index">{{ item }}</div>
         </div>
       </el-col>
     </el-row>
@@ -33,13 +34,24 @@ export default {
       articleDataList: [],
       articleTotal: 0,
       nowPage: 1,
-      isLoading: false
+      isLoading: false,
+      categories: []
     }
   },
   methods: {
     pageChange (page) {
       this.nowPage = page
       this.getData()
+    },
+
+    getCategory () {
+      ak.getUrlDataParams('article/category', '' ,true, this, (res, isErr) => {
+        if (!isErr && res.data.code === 0) {
+          this.categories = res.data.data
+        } else {
+          this.$message.error(res.data.data)
+        }
+      })
     },
 
     getData () {
@@ -58,6 +70,7 @@ export default {
   },
   created () {
     this.getData()
+    this.getCategory()
   },
   components: {
     ArticleExcerpt
@@ -72,8 +85,30 @@ export default {
   }
   
   .blog-more {
+    margin-top: 30px;
+    margin-left: 20px;
     @media (max-width: 768px) {
       display: none;
+    }
+    .blog-more_category {
+      border: 1px solid #DCDFE6;
+      border-radius: 3px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      padding: 6px 10px;
+      margin-top: 10px;
+      &:first-child {
+        margin-top: 0;
+      }
+      a {
+        display: block;
+        text-decoration: none;
+        color: #303133;
+      }
+      &:hover {
+        border-color: #303133;
+      }
     }
   }
 }

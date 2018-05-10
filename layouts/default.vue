@@ -15,16 +15,19 @@
         <ak-footer></ak-footer>
       </div>
     </el-footer>
+    <back-top date="100" topheight="60"></back-top>
   </el-container>
 </template>
 
 <script>
 import AkHeader from '~/components/AkHeader.vue'
 import AkFooter from '~/components/AkFooter.vue'
+import BackTop from '~/components/BackTop.vue'
 export default {
   components: {
     AkHeader,
-    AkFooter
+    AkFooter,
+    BackTop
   }
 }
 </script>
