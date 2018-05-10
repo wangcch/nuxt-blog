@@ -14,7 +14,17 @@
         </div>
       </el-col>
       <el-col :xs="24" :sm="6">
-        <div class="article-more">
+        <div class="article-more ty-panel_nopadding" v-show="prevTitle">
+          <router-link :to="'/article/' + prevTitle">
+            <p class="sub">Prev</p>
+            <p class="title">{{ prevTitle }}</p>
+          </router-link>
+        </div>
+        <div class="article-more ty-panel_nopadding" v-show="nextTitle">
+          <router-link :to="'/article/' + nextTitle">
+            <p class="sub">Next</p>
+            <p class="title">{{ nextTitle }}</p>
+          </router-link>
         </div>
       </el-col>
     </el-row>
@@ -24,7 +34,7 @@
 <script>
 import ak from '~/assets/lib/ak.js'
 import moment from 'moment'
-import { mapGetters, mapActions } from 'vuex'
+// import { mapGetters, mapActions } from 'vuex'
 export default {
   data () {
     return {
@@ -32,20 +42,11 @@ export default {
       articleContentHtml: '',
       isLoading: false,
       searchTitle: this.$route.params.title,
-      tags: []
+      prevTitle: '',
+      nextTitle: ''
     }
   },
-
-  computed: {
-    ...mapGetters([
-      'getTags'
-    ])
-  },
   methods: {
-    ...mapActions([
-      'toUpdateTags'
-    ]),
-
     formatDate (date) {
       return moment(date).format('YYYY/MM/DD HH:mm')
     },
@@ -55,6 +56,8 @@ export default {
       ak.getUrlDataParams('article', 'title=' + this.searchTitle , true, this, (res, isErr) => {
         if (!isErr && res.data.code === 0) {
           this.articleData = res.data.data
+          this.prevTitle = this.articleData.prev ? this.articleData.prev.title : ''
+          this.nextTitle = this.articleData.next ? this.articleData.next.title : ''
           ak.makedownToHtml(this.articleData.excerpt + this.articleData.content, (data) => {
             this.articleContentHtml = data
             this.isLoading = false
@@ -66,12 +69,8 @@ export default {
       })
     }
   },
-  mounted () {
-    console.log(this.getTags)
-  },
   created () {
     this.getData()
-    this.toUpdateTags()
   },
   components: {
   }
@@ -145,8 +144,28 @@ export default {
   }
   
   .article-more {
+    margin-top: 20px;
+    margin-left: 20px;
+    transition: all 0.3s;
+    &:first-child {
+      margin-top: 30px;
+    }
     @media (max-width: 768px) {
-      display: none;
+      margin: 10px 0 0 0;
+    }
+    a {
+      display: block;
+      text-decoration: none;
+      color: #303133;
+      padding: 20px;
+      .sub {
+        color: #606266;
+        font-size: 14px;
+        margin-bottom: 5px;
+      }
+    }
+    &:hover {
+      box-shadow: 0 6px 20px rgba(#000, 0.1);
     }
   }
 }

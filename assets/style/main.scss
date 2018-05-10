@@ -56,6 +56,12 @@ body {
   }
 }
 
+.ty-panel_nopadding {
+  border: 1px solid #E4E7ED;
+  background: #ffffff;
+  border-radius: 3px;
+}
+
 // element-ui
 .el-message-box {
   @media (max-width: 768px) {
