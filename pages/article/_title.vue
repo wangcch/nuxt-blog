@@ -24,16 +24,28 @@
 <script>
 import ak from '~/assets/lib/ak.js'
 import moment from 'moment'
+import { mapGetters, mapActions } from 'vuex'
 export default {
   data () {
     return {
       articleData: {},
       articleContentHtml: '',
       isLoading: false,
-      searchTitle: this.$route.params.title
+      searchTitle: this.$route.params.title,
+      tags: []
     }
   },
+
+  computed: {
+    ...mapGetters([
+      'getTags'
+    ])
+  },
   methods: {
+    ...mapActions([
+      'toUpdateTags'
+    ]),
+
     formatDate (date) {
       return moment(date).format('YYYY/MM/DD HH:mm')
     },
@@ -54,8 +66,12 @@ export default {
       })
     }
   },
+  mounted () {
+    console.log(this.getTags)
+  },
   created () {
     this.getData()
+    this.toUpdateTags()
   },
   components: {
   }

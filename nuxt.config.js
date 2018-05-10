@@ -43,6 +43,10 @@ module.exports = {
     'axios'
   ],
 
+  env: {
+    baseUrl: process.env.BASE_URL || 'http://localhost:5001'
+  },
+
   plugins: [
     { src: '~plugins/element-ui', ssr: true },
     { src: '~plugins/charts' },

@@ -21,7 +21,14 @@
         </div>
       </el-col>
       <el-col :xs="24" :sm="10" :md="8">
-        <div class="author-more">
+        <div class="author-more ty-panel">
+          <table style="width: 100%;">
+            <tr :class="'author_item author_item' + index " v-for="(author, index) in authorRanking" :key="author.username + index">
+              <td>{{ index + 1 }}</td>
+              <td style="text-transform: capitalize;"><router-link :to="'/author/' + author.username">{{ author.username }}</router-link></td>
+              <td align="right">{{ author.article_count }}</td>
+            </tr>
+          </table>
         </div>
       </el-col>
     </el-row>
@@ -30,6 +37,7 @@
 
 <script>
 import ak from '~/assets/lib/ak.js'
+import axios from 'axios'
 import moment from 'moment'
 import ArticleExcerpt from '~/components/ArticleExcerpt.vue'
 export default {
@@ -39,6 +47,7 @@ export default {
       userInfo: {},
       isUserLoading: false,
       isArticleLoading: false,
+      authorRanking: [],
       searchAuthor: this.$route.params.author
     }
   },
@@ -65,6 +74,13 @@ export default {
           this.isArticleLoading = false
         } else {
           this.isArticleLoading = false
+          this.$message.error(res.data.error)
+        }
+      })
+      ak.getUrlDataParams('user/ranking', '', true, this, (res, isErr) => {
+        if (!isErr && res.data.code === 0) {
+          this.authorRanking = res.data.data
+        } else {
           this.$message.error(res.data.error)
         }
       })
@@ -127,6 +143,35 @@ export default {
   }
   .author-article {
     padding: 10px 0;
+  }
+
+  .author-more {
+    margin-left: 20px;
+    margin-top: 30px;
+    .author_item {
+      overflow: hidden;
+      a {
+        display: block;
+        color: #303133;
+        text-decoration: none;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+      td {
+        padding: 3px 0;
+      }
+      &.author_item0 {
+        font-size: 26px;
+        font-weight: bold;
+      }
+      &.author_item1 {
+        font-size: 20px;
+      }
+      &.author_item2 {
+        font-size: 18px;
+      }
+    }
   }
 }
 </style>
