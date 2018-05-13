@@ -25,6 +25,11 @@
         </el-col>
       </el-row>
     </div>
+    <div class="about-introduce ty-panel">
+      <p>
+        ACM国际大学生程序设计竞赛(英文全称:ACM International Collegiate ProgrammingContest（ACM-ICPC或ICPC）是由美国计算机协会（ACM）主办的，一项旨在展示大学生创新能力、团队精神和在压 力下编写程序、分析和解决问题能力的年度竞赛。经过近30多年的发展，ACM国际大学生程序设计竞赛已经发展成为最具影响力的大学生计算机竞赛。 竞赛的历史可以上溯到1970年，当时在美国德克萨斯A&M大学举办了首届比赛。当时的主办方是the Alpha Chapter of the UPE Computer Science sHonorSociety。作为 一种全新的发现和培养计算机科学顶尖学生的方式，竞赛很快得到美国和加拿大各大学的积极响应。1977年，在ACM计算机科学会议期间举办了首次总决赛， 并演变成为目前的一年一届的多国参与的国际性比赛。迄今已经举办了36届。
+      </p>
+    </div>
   </div>
 </template>
 
@@ -81,6 +86,14 @@ export default {
       @media (max-width: 768px) {
         margin: 0 0 10px 0;
       }
+    }
+  }
+  .about-introduce {
+    margin-top: 30px;
+    p {
+      color: #606266;
+      line-height: 22px;
+      text-indent: 2em;
     }
   }
 }
