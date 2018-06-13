@@ -38,7 +38,7 @@ import LinkShare from '~/components/LinkShare.vue'
 export default {
   data () {
     return {
-      gradeData: [
+        gradeData: [
         {
           grade: 'national',
           count: 10
